@@ -1,10 +1,20 @@
 const { response } = require('express')
 const express = require('express')
+const mongoose = require('mongoose')
 const app = express()
 
 app.use(express.json())
 
-const http = require('http')
+mongoose.connect('mongodb+srv://Admin:dbcaldar@cluster0.hhvym.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+        .then((result) =>{
+            console.log('Database connected')
+        })
+        .catch((error)=>{
+            console.log('Database not connected, error: ' , error)
+        })
+
+        
+/*const http = require('http')
 let machines = 
 [{
     "id":1,
@@ -66,3 +76,4 @@ const PORT = 3001
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 })
+*/
