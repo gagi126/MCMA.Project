@@ -7,12 +7,12 @@ const router = require('./routes')
 
 //conection DB
 mongoose.connect('mongodb+srv://Admin:dbcaldar@cluster0.hhvym.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
-        .then((result) =>{
-            console.log('Database connected')
-        })
-        .catch((error)=>{
-            console.log('Database not connected, error: ' , error)
-        })
+    .then((result) =>{
+        console.log('Database connected')
+    })
+    .catch((error)=>{
+        console.log('Database not connected, error: ' , error)
+    })
 
 app.get('/',(request, response) =>  {
     response.send('<h1>MCMA</h1>')
@@ -78,4 +78,5 @@ app.post('/api/machine',(request,response)=>{
     machines = machines.concat(newMachine)
     response.json(newMachine)
 })
+
 */

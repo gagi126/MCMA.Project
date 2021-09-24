@@ -1,8 +1,12 @@
 const express = require ('express')
 const controller = require ('../../controllers/users/controller')
 
-const router = express.Router();
+const rout = express.Router();
 
-router.route('/showall_user').get(controller.indexClient);
+rout.get('/showall_user',controller.indexClients);
+//rout.get('/showall_rol',controller.indexRol);
+rout.post('/', controller.addUser);
+rout.post('/addrol', controller.addRol);
 
-module.exports = router;
+
+module.exports = rout;
