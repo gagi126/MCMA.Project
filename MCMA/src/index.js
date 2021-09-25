@@ -1,20 +1,20 @@
 const { response } = require('express')
 const express = require('express')
 const mongoose = require('mongoose')
-const app = express()
+const app = module.exports = express()
 const PORT = 3001
 const router = require('./routes')
 
 //conection DB
 mongoose.connect('mongodb+srv://Admin:dbcaldar@cluster0.hhvym.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
-.then((result) =>{
-    console.log('Database connected')
-})
-.catch((error)=>{
-    console.log('Database not connected, error: ' , error)
-})
+        .then((result) =>{
+            console.log('Database connected')
+        })
+        .catch((error)=>{
+            console.log('Database not connected, error: ' , error)
+        })
 
-app.get('/',(request, response) => {
+app.get('/',(request, response) =>  {
     response.send('<h1>MCMA</h1>')
 })
 
@@ -24,7 +24,7 @@ app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 })
 
-/* const http = require('http')
+/*const http = require('http')
 let machines =
 [{
     "id":1,
@@ -41,10 +41,6 @@ let machines =
     "machine":"Mercedes-Benz",
     "tipo_caldera":"Cement Mason"
 }]
-app.get('/',(request, response) =>  {
-    response.send('<h1>MCMA</h1>')
-
-})
 app.get('/api/getmachines',(request,response) =>{
     response.json(machines)
 })
