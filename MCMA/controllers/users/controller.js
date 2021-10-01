@@ -4,12 +4,9 @@ const rSchema = require('../../models/Rol')
 
 const indexClients = async (req,res) =>{
     try{
-        const response = await uSchema.find()
-        return res.status(200).json({
-            response: response,
-            error: false,
-        })
-    }
+        const user = await uSchema.find()
+        res.json(user);
+        }
     catch(error){
         return res.status(400).json({
             error: true,
@@ -49,10 +46,14 @@ const addRol = async (req,res) =>{
 }
 const addUser = async (req,res) =>{
     try {
-        const User = new uSchema (req.body)
+        const User = new uSchema ({
+            name = req.body.name,
+            address = req.body.address,
+            location = req.body.location,
+            });
         const newUser = await User.save()
         return res.status(200).json({
-            data: newClient,
+            data: newUser,
             error: false,
         })
     } catch (error) {
@@ -64,7 +65,7 @@ const addUser = async (req,res) =>{
 }
 /*const getUserById = async(req,res) => {
     try {
-        const response = await uSchema.findOne({_id: req.params.})
+        const response = await uSchema.findOne()
         const newUser = await User.save()
         return res.status(200).json({
             data: newClient,
