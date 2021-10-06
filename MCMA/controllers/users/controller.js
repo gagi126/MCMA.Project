@@ -31,11 +31,13 @@ const indexRol = async (req,res) =>{
 }
 const addRol = async (req,res) =>{
     try {
-        const Rol = new rSchema (req.body)
+        const Rol = new rSchema ({
+            role_id : req.body._id,
+            description: req.body.description
+        })
         const newRol = await Rol.save()
         return res.status(200).json({
-            data: newRol,
-            error: false,
+            
         })
     } catch (error) {
         return res.status(400).json({
@@ -46,10 +48,14 @@ const addRol = async (req,res) =>{
 }
 const addUser = async (req,res) =>{
     try {
+        console.log(req.body);
+        const Role = new rSchema({
+
+        })
         const User = new uSchema ({
-            name = req.body.name,
-            address = req.body.address,
-            location = req.body.location,
+            name : req.body.name,
+            address : req.body.address,
+            location : req.body.location,
             });
         const newUser = await User.save()
         return res.status(200).json({
