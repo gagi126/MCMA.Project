@@ -1,6 +1,13 @@
 const mongoose = require('mongoose')
+mongoose.connect('mongodb+srv://Admin:dbcaldar@cluster0.hhvym.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+    .then((result) =>{
+        console.log('Database connected')
+    })
+    .catch((error)=>{
+        console.log('Database not connected, error: ' , error)
+    })
 const uSchema = require('../../models/User')
-const rSchema = require('../../models/Rol')
+const rSchema =require('../../models/Rol')
 
 const indexClients = async (req,res) =>{
     try{
@@ -35,8 +42,11 @@ const addRol = async (req,res) =>{
             role_id : req.body._id,
             description: req.body.description
         })
+        console.log(req.body);
         const newRol = await Rol.save()
         return res.status(200).json({
+            data : newRol,
+            error: false
             
         })
     } catch (error) {
@@ -49,9 +59,9 @@ const addRol = async (req,res) =>{
 const addUser = async (req,res) =>{
     try {
         console.log(req.body);
-        const Role = new rSchema({
+        //const Role = new rSchema({
 
-        })
+        //})
         const User = new uSchema ({
             name : req.body.name,
             address : req.body.address,
