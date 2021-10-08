@@ -6,7 +6,7 @@ const rout = express.Router();
 const jsonParser = bodyParser.json()
 rout.get('/showall_user',jsonParser,controller.indexClients);
 rout.get('/showall_rol',jsonParser,controller.indexRol);
-rout.post('/',jsonParser, controller.addUser);
+rout.post('/addUser',jsonParser, controller.addUser);
 rout.post('/addrol',jsonParser, controller.addRol);
 
 

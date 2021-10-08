@@ -1,6 +1,4 @@
-const { response } = require('express')
 const express = require('express')
-const mongoose = require('mongoose')
 const app = module.exports = express()
 const PORT = 3001
 const router = require('./routes')
