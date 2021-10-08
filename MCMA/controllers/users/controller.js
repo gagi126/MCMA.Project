@@ -79,7 +79,7 @@ const addUser = async (req,res) =>{
         })        
     }
 }
-/*const getUserById = async(req,res) => {
+const getUserById = async(req,res) => {
     try {
         const response = await uSchema.findOne({_id : req.params._id})
         return res.status(200).json({
@@ -92,10 +92,11 @@ const addUser = async (req,res) =>{
             message: error,
         })        
     }
-}*/
+}
 module.exports ={
     indexClients,
     addUser,
     addRol,
-    indexRol
+    indexRol,
+    getUserById,
 }
