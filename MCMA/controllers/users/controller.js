@@ -11,8 +11,8 @@ const rSchema =require('../../models/Rol')
 
 const indexClients = async (req,res) =>{
     try{
-        const user = await uSchema.find()
-        res.json(user);
+        const user = await uSchema.find().populate('rol');
+        return res.status(200).json(user);
         }
     catch(error){
         return res.status(400).json({
@@ -42,12 +42,11 @@ const addRol = async (req,res) =>{
             role_id : req.body._id,
             description: req.body.description
         })
-        console.log(req.body);
-        const newRol = await Rol.save()
-        return res.status(200).json({
-            data : newRol,
+        const newRol = await Rol.save(); 
+        return res.status(201).json({
+            data : {role_id : newRol._id,
+                    description : newRol.description},
             error: false
-            
         })
     } catch (error) {
         return res.status(400).json({
@@ -58,33 +57,33 @@ const addRol = async (req,res) =>{
 }
 const addUser = async (req,res) =>{
     try {
-        console.log(req.body);
-        //const Role = new rSchema({
+        console.log(req.body.rol);
 
-        //})
         const User = new uSchema ({
             name : req.body.name,
             address : req.body.address,
             location : req.body.location,
-            });
-        const newUser = await User.save()
-        return res.status(200).json({
-            data: newUser,
+            rol : req.body.rol,
+        });
+
+        const newUser = await User.save();        
+        const response = await newUser.populate('rol')
+        return res.status(201).json({
+            data: response,
             error: false,
         })
     } catch (error) {
         return res.status(400).json({
-            error: true,
+            error: error,
             message: error,
         })        
     }
 }
 /*const getUserById = async(req,res) => {
     try {
-        const response = await uSchema.findOne()
-        const newUser = await User.save()
+        const response = await uSchema.findOne({_id : req.params._id})
         return res.status(200).json({
-            data: newClient,
+            data: response,
             error: false,
         })
     } catch (error) {
