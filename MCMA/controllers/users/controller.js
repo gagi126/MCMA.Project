@@ -7,7 +7,7 @@ mongoose.connect('mongodb+srv://Admin:dbcaldar@cluster0.hhvym.mongodb.net/myFirs
         console.log('Database not connected, error: ' , error)
     })
 const uSchema = require('../../models/User')
-const rSchema =require('../../models/Rol')
+const rSchema = require('../../models/Rol')
 
 const indexClients = async (req,res) =>{
     try{
@@ -21,6 +21,7 @@ const indexClients = async (req,res) =>{
         })
     }
 }
+
 const indexRol = async (req,res) =>{
     try{
         const response = await rSchema.find()
@@ -36,6 +37,7 @@ const indexRol = async (req,res) =>{
         })
     }
 }
+
 const addRol = async (req,res) =>{
     try {
         const Rol = new rSchema ({
@@ -55,10 +57,9 @@ const addRol = async (req,res) =>{
         })        
     }
 }
+
 const addUser = async (req,res) =>{
     try {
-        console.log(req.body.rol);
-
         const User = new uSchema ({
             name : req.body.name,
             address : req.body.address,
@@ -79,6 +80,7 @@ const addUser = async (req,res) =>{
         })        
     }
 }
+
 const getUserById = async(req,res) => {
     try {
         const response = await uSchema.findOne({_id : req.params._id})
@@ -93,10 +95,26 @@ const getUserById = async(req,res) => {
         })        
     }
 }
+
+const deleteUser = async(req,res)=> {
+    try {
+        const response = await uSchema.findByIdAndDelete({_id : req.params._id})
+        return res.status(200).json({
+            message: 'User Deleted succesfull',
+        })
+    } catch (error) {
+        return res.status(400).json({
+            error: true,
+            message : error,
+        })
+    }
+}
+
 module.exports ={
     indexClients,
     addUser,
     addRol,
     indexRol,
     getUserById,
+    deleteUser,
 }
