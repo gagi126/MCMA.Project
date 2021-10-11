@@ -6,8 +6,8 @@ mongoose.connect('mongodb+srv://Admin:dbcaldar@cluster0.hhvym.mongodb.net/myFirs
     .catch((error)=>{
         console.log('Database not connected, error: ' , error)
     })
-const uSchema = require('../../models/User')
-const rSchema = require('../../models/Rol')
+const uSchema = require('../../models/User');
+const rSchema = require('../../models/Rol');
 
 const indexClients = async (req,res) =>{
     try{
@@ -66,7 +66,6 @@ const addUser = async (req,res) =>{
             location : req.body.location,
             rol : req.body.rol,
         });
-
         const newUser = await User.save();        
         const response = await newUser.populate('rol')
         return res.status(201).json({
@@ -110,6 +109,28 @@ const deleteUser = async(req,res)=> {
     }
 }
 
+const editUser = async (req,res) => {
+    try {
+        const User = new uSchema ({
+            _id : req.params._id,
+            name : req.body.name,
+            address : req.body.address,
+            location : req.body.location,
+            rol : req.body.rol, 
+        });
+        const response = await uSchema.findOneAndUpdate({_id : req.params._id},User,{new : true})
+        return res.status(200).json({
+            data : response,
+            error : false,
+        })
+    } catch (error) {
+        return res.status(400).json({
+            error: true,
+            message : error,
+        })
+    }
+}
+
 module.exports ={
     indexClients,
     addUser,
@@ -117,4 +138,5 @@ module.exports ={
     indexRol,
     getUserById,
     deleteUser,
+    editUser,
 }
