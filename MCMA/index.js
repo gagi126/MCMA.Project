@@ -1,6 +1,6 @@
 const express = require('express')
 const app = module.exports = express()
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 const router = require('./routes')
 
 //conection DB
