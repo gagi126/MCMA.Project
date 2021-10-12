@@ -3,7 +3,7 @@ const app = module.exports = express()
 const router = require('./routes')
 const cors = require('cors');
 const mongoose = require('mongoose');
-const dotenv = require("../MCMA/node_modules/dotenv")
+const dotenv = require("dotenv")
 require('dotenv').config();
 
 const PORT = process.env.PORT || 3001
