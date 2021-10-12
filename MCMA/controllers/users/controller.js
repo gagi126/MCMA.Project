@@ -1,11 +1,5 @@
 const mongoose = require('mongoose')
-mongoose.connect('mongodb+srv://Admin:dbcaldar@cluster0.hhvym.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
-    .then((result) =>{
-        console.log('Database connected')
-    })
-    .catch((error)=>{
-        console.log('Database not connected, error: ' , error)
-    })
+
 const uSchema = require('../../models/User');
 const rSchema = require('../../models/Rol');
 
