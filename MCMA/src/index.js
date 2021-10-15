@@ -1,16 +1,17 @@
-import express from 'express';
+const express = require('express')
 const app = module.exports = express()
-import router from './routes';
-import cors from 'cors';
-import { connect } from 'mongoose';
+const router = require('./routes')
+const cors = require('cors');
+const mongoose = require('mongoose');
+const dotenv = require("dotenv")
 require('dotenv').config();
 
 const PORT = process.env.PORT || 3001
 
-use(cors());
+app.use(cors());
 
 //conection DB
-connect(
+mongoose.connect(
     process.env.MONGO_URI,{
         useUnifiedTopology: true,
         useNewUrlParser: true        
@@ -21,11 +22,11 @@ connect(
     .catch((error)=>{
         console.log('Database not connected, error: ' , error)
     })
-get('/',(request, response) =>  {
+app.get('/',(request, response) =>  {
     response.send('<h1>MCMA</h1>')
 })
-use('/', router)
+app.use('/', router)
 
-listen(PORT, () => {
+app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 })

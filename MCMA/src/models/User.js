@@ -1,7 +1,8 @@
-import { Schema as _Schema, model } from 'mongoose';
+const express = require('express');
+const mongoose = require('mongoose');
 
-const Schema = _Schema;
-import Rol from './Rol';
+const Schema = mongoose.Schema;
+const Rol = require('./Rol');
 
  
 const userSchema = new Schema({
@@ -12,4 +13,4 @@ const userSchema = new Schema({
     role: [{ type: Schema.ObjectId, ref: Rol}]
 })
 
-export default model("user", userSchema);
+module.exports = mongoose.model("user", userSchema);

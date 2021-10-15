@@ -1,2 +1,0 @@
-# MCMA.Project
-MCMA

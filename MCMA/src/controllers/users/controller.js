@@ -1,9 +1,11 @@
-import uSchema, { find, findOne, findByIdAndDelete, findOneAndUpdate } from '../../models/User';
-import rSchema, { find as _find } from '../../models/Rol';
+const mongoose = require('mongoose')
+
+const uSchema = require('../../models/User');
+const rSchema = require('../../models/Rol');
 
 const indexClients = async (req,res) =>{
     try{
-        const user = await find().populate('rol');
+        const user = await uSchema.find().populate('rol');
         return res.status(200).json(user);
         }
     catch(error){
@@ -16,7 +18,7 @@ const indexClients = async (req,res) =>{
 
 const indexRol = async (req,res) =>{
     try{
-        const response = await _find()
+        const response = await rSchema.find()
         return res.status(200).json({
             response: response,
             error: false,
@@ -74,7 +76,7 @@ const addUser = async (req,res) =>{
 
 const getUserById = async(req,res) => {
     try {
-        const response = await findOne({_id : req.params._id})
+        const response = await uSchema.findOne({_id : req.params._id})
         return res.status(200).json({
             data: response,
             error: false,
@@ -89,6 +91,7 @@ const getUserById = async(req,res) => {
 
 const deleteUser = async(req,res)=> {
     try {
+        const response = await uSchema.findByIdAndDelete({_id : req.params._id})
         return res.status(200).json({
             message: 'User Deleted succesfull',
         })
@@ -109,7 +112,7 @@ const editUser = async (req,res) => {
             location : req.body.location,
             rol : req.body.rol, 
         });
-        const response = await findOneAndUpdate({_id : req.params._id},User,{new : true})
+        const response = await uSchema.findOneAndUpdate({_id : req.params._id},User,{new : true})
         return res.status(200).json({
             data : response,
             error : false,
@@ -122,7 +125,7 @@ const editUser = async (req,res) => {
     }
 }
 
-export default{
+module.exports ={
     indexClients,
     addUser,
     addRol,

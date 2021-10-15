@@ -1,15 +1,15 @@
-import { Router } from 'express'
+const express = require('express')
 
-import tecnicos from './tecnicos'
-import edificios from './edificios'
-import users from './users'
-import calderas from './calderas'
+const tecnicos = require('./tecnicos')
+const edificios = require('./edificios')
+const users = require('./users')
+const calderas = require('./calderas')
 
-const router = Router()
+const router = express.Router()
 
 router.use('/users',users)
 router.use('/calderas',calderas)
 router.use('/tecnicos', tecnicos);
 router.use('/edificios', edificios);
 
-export default router
+module.exports = router

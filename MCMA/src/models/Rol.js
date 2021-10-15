@@ -1,7 +1,7 @@
-import { Schema } from 'mongoose';
+const mongoose = require('mongoose');
 
-const rol = new Schema({
+const rol = new mongoose.Schema({
 
-    description= String
+    description : String
 })
-export default rol;
+module.exports = rol;
