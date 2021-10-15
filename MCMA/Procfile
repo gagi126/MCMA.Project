@@ -1,0 +1,1 @@
+web: node MCMA/index.js
